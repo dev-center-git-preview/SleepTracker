@@ -67,5 +67,17 @@ class SleepDatabaseTest {
         val tonight = sleepDao.getLast()
         assertEquals(tonight?.sleepQuality, -1)
     }
+
+    @Test
+    fun update(){
+        var item = SleepNight()
+        sleepDao.insert(item)
+        var updatableItem = sleepDao.getLast()
+        updatableItem!!.endTimeMillis = 0L
+        sleepDao.update(updatableItem)
+        var updatedItem = sleepDao.getLast()
+
+        assertEquals(updatedItem!!.endTimeMillis, 0L)
+    }
 }
 
